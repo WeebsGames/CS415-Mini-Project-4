@@ -60,14 +60,22 @@ pts2 = np.float32([[150, 250],
 M = cv2.getAffineTransform(pts1, pts2)
 dst = cv2.warpAffine(img, M, (cols, rows))
 
-plt.subplot(121)
-plt.imshow(img)
-plt.title('Input')
+cv2.imwrite("lena_transform.png", dst)
+cv2.imshow("transform", dst)
 
-plt.subplot(122)
-plt.imshow(dst)
-plt.title('Output')
+pts1 = np.float32([[50, 50],
+                   [200, 50], 
+                   [50, 200]])
 
-plt.show()
+pts2 = np.float32([[50, 200],
+                   [50, 50],
+                   [200, 50]])
+
+M = cv2.getAffineTransform(pts1, pts2)
+dst = cv2.warpAffine(img, M, (cols, rows))
+
+cv2.imwrite("lena_flip.png", dst)
+cv2.imshow("flip", dst)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
