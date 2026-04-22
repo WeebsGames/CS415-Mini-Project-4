@@ -47,13 +47,15 @@ cv2.destroyAllWindows()
 img = cv2.imread('lena.png')
 rows, cols, ch = img.shape
 
+#start
 pts1 = np.float32([[50, 50],
                    [200, 50], 
                    [50, 200]])
 
-pts2 = np.float32([[10, 100],
-                   [200, 50], 
-                   [100, 250]])
+#end
+pts2 = np.float32([[150, 250],
+                   [300, 250], 
+                   [150, 400]])
 
 M = cv2.getAffineTransform(pts1, pts2)
 dst = cv2.warpAffine(img, M, (cols, rows))
@@ -67,12 +69,5 @@ plt.imshow(dst)
 plt.title('Output')
 
 plt.show()
-
-# Displaying the image
-while(1):
-    
-    cv2.imshow('image', img)
-    if cv2.waitKey(20) & 0xFF == 27:
-        break
-        
+cv2.waitKey(0)
 cv2.destroyAllWindows()
