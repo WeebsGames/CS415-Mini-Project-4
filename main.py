@@ -63,15 +63,10 @@ dst = cv2.warpAffine(img, M, (cols, rows))
 cv2.imwrite("lena_transform.png", dst)
 cv2.imshow("transform", dst)
 
-pts1 = np.float32([[50, 50],
-                   [200, 50], 
-                   [50, 200]])
-
-pts2 = np.float32([[50, 200],
-                   [50, 50],
-                   [200, 50]])
-
-M = cv2.getAffineTransform(pts1, pts2)
+# Flip horizontally with respect to the image center.
+# This uses a 2x3 affine matrix with translation so the mirror axis is the center.
+M = np.float32([[-1, 0, cols - 1],
+                [0, 1, 0]])
 dst = cv2.warpAffine(img, M, (cols, rows))
 
 cv2.imwrite("lena_flip.png", dst)
