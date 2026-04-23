@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import math
 from matplotlib import pyplot as plt
 
 
@@ -71,6 +72,13 @@ dst = cv2.warpAffine(img, M, (cols, rows))
 
 cv2.imwrite("lena_flip.png", dst)
 cv2.imshow("flip", dst)
+
+M = np.float32([[math.cos(math.radians(45)), -1 * math.sin(math.radians(45)), 0],
+                [math.sin(math.radians(45)), math.cos(math.radians(45)), 0]])
+dst = cv2.warpAffine(img, M, (cols, rows))
+
+cv2.imwrite("lena_rot_origin.png", dst)
+cv2.imshow("rot", dst)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
