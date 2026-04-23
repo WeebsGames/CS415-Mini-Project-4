@@ -80,16 +80,17 @@ dst = cv2.warpAffine(img, M, (cols, rows))
 cv2.imwrite("lena_rot_origin.png", dst)
 cv2.imshow("rot_origin", dst)
 
-M = np.float32([[1, 0, -cols/2],
-                [0, 1, -rows/2]])
-dst = cv2.warpAffine(img, M, (cols, rows))
-cv2.imshow("centered", dst)
+# Rotate lena.png around the center by 45 degrees clockwise
+center = (cols / 2, rows / 2)
+M = cv2.getRotationMatrix2D(center, -45, 1)  # -45 degrees for clockwise rotation
+rotated = cv2.warpAffine(img, M, (cols, rows))
 
-M = np.float32([[math.cos(math.radians(45)), -1 * math.sin(math.radians(45)), 0],
-                [math.sin(math.radians(45)), math.cos(math.radians(45)), 0]])
-dst = cv2.warpAffine(dst, M, (cols, rows))
+cv2.imwrite('lena_rot_center.png', rotated)
 
-cv2.imwrite("lena_rot_center.png", dst)
-cv2.imshow("rot_center", dst)
+
+cv2.imshow('Rotated Lena', rotated)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
